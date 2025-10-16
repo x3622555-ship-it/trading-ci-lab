@@ -19,4 +19,4 @@ def strategy():
 
 @pytest.fixture
 def broker():
-    return Broker(cash=1000)
+    return Broker(cash=100_000)
