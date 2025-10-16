@@ -4,11 +4,13 @@ from unittest.mock import MagicMock
 from backtester.engine import Backtester
 from backtester.broker import Broker
 
-def test_engine_runs_and_returns_equity(prices, broker, strategy):
-    bt = Backtester(strategy, broker)
+def test_engine_runs_and_returns_equity(prices, strategy):
+    rich_broker = Broker(cash=1_000_000)  # plenty of cash to avoid RuntimeError
+    bt = Backtester(strategy, rich_broker)
     eq = bt.run(prices)
     assert isinstance(eq, float)
     assert eq > 0
+
 
 def test_engine_empty_series(broker, strategy):
     bt = Backtester(strategy, broker)
